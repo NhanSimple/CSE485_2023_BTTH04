@@ -16,7 +16,7 @@ class StudentController extends Controller
     {
         $data = Student::latest()->paginate(5);
 
-        return view('index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('students.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('students.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect()->route('students.index')->with('success', 'Student Added successfully.');
+        return redirect('/students/index')->with('success', 'Student Added successfully.');
     }
 
     /**
@@ -67,7 +67,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return view('show', compact('student'));
+        return view('students.show', compact('student'));
     }
 
     /**
@@ -78,7 +78,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('edit', compact('student'));
+        // $student =Student::findOrFail($student);
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -117,7 +118,7 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect()->route('students.index')->with('success', 'Student Data has been updated successfully');
+        return redirect('/students/index')->with('success', 'Student Data has been updated successfully');
     }
 
     /**
@@ -126,10 +127,13 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
+    public function delete(Student $student){
+        return view('students.delete', compact('student'));
+    }
     public function destroy(Student $student)
     {
         $student->delete();
-
-        return redirect()->route('students.index')->with('success', 'Student Data deleted successfully');
+  
+        return redirect('/students/index')->with('success', 'Student deleted successfully');
     }
 }

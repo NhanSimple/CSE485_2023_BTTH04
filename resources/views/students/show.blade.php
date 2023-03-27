@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col col-md-6"><b>Student Details</b></div>
             <div class="col col-md-6">
-                <a href="{{ route('students.index') }}" class="btn btn-primary btn-sm float-end">View All</a>
+                <a href="/students/index" class="btn btn-primary btn-sm float-end">View All</a>
             </div>
         </div>
     </div>
@@ -40,5 +40,3 @@
 </div>
 
 @endsection('content')
-
-
